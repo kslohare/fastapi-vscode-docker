@@ -1,0 +1,12 @@
+1) Make sure you are in the right folder
+cd /home/ksl/code/fastapi-vscode-docker
+
+2) Verify Docker is running
+docker info
+
+3) Only builds images, does not start containers
+docker compose build
+
+4) Starts services (build only if image missing)
+docker compose up
+
