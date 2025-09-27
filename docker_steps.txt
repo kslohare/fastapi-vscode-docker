@@ -5,8 +5,22 @@ cd /home/ksl/code/fastapi-vscode-docker
 docker info
 
 3) Only builds images, does not start containers
-docker compose build
+docker images
+# Build the image
+docker compose build --no-cache
+# Verify image is built
+docker images
+# Start an interactive one-off container to inspect filesystem:
+# list files under /code
+docker compose run --rm web ls -la /code
+docker compose run --rm web ls -la /code/app
+#Check python import and path inside the container:
+docker compose run --rm web python -c "import sys, os, importlib; print('cwd=', os.getcwd()); print('sys.path=', sys.path); import app; print('app.__file__=', app.__file__)"
+If import app prints the __file__ path, import works and uvicorn should run. If the import app fails here, the printed ls outputs will show what's missing and we can adjust.
+
 
 4) Starts services (build only if image missing)
 docker compose up
 
+5) Docker Desktop like cli
+docker ps
